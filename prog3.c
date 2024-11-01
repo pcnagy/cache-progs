@@ -57,7 +57,7 @@ processor might skip some array accesses or perform multiple array accesses in p
 #pragma GCC optimize (2, "no-tree-vectorize")
 
 /* array of about 1M ints, configured to be placed at an address that's a multiple of 128 */
-int global_array[1048568] __attribute__((aligned(128)));
+int global_array[1048576] __attribute__((aligned(128)));
 
 /*
 This tells GCC or Clang to assume that the array is being modified,
@@ -71,9 +71,9 @@ void prevent_optimizations_based_on_knowing_array_values() {
 }
 
 int main() {
-    const int MAX = 1048568;
-    const int SKIP = 4;
-    const int ITERS = 64000000;
+    const int MAX = 1048576;
+    const int SKIP = 16;
+    const int ITERS = 10000000;
 
 /* these two lines tell Clang (if used to compile this) not to try to 
    perform optimizations on this loop that are likely to make the access
